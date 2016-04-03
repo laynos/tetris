@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Frame extends JFrame {
+public class View extends JFrame {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class Frame extends JFrame {
 
 	private JPanel board;
 	
-	public Frame() {
+	public View() {
 		
 		setTitle("Tetris by BEMAT, GULL & WAN");
 		setResizable(false);

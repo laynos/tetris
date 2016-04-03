@@ -11,19 +11,19 @@ public class Tetrimino {
 			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } ,
 			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } , 
 			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } };
-	
+
 	//L
 	private int [][][] piece2 = { { {0,1,0,0},{0,1,0,0},{0,1,1,0},{0,0,0,0} } , 
 			{ {0,0,0,0},{0,1,1,1},{0,1,0,0},{0,0,0,0} } ,
 			{ {0,1,1,0},{0,0,1,0},{0,0,1,0},{0,0,0,0} } , 
 			{ {0,0,1,0},{1,1,1,0},{0,0,0,0},{0,0,0,0} } };
-	
+
 	//I
 	private int [][][] piece3 = { { {1,1,1,1},{0,0,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{0,1,0,0},{0,1,0,0},{0,1,0,0} } ,
 			{ {1,1,1,1},{0,0,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{0,1,0,0},{0,1,0,0},{0,1,0,0} } };
-	
+
 	//s
 	private int [][][] piece4 = { { {0,1,1,0},{1,1,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } ,
@@ -34,28 +34,28 @@ public class Tetrimino {
 			{ {0,0,1,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } ,
 			{ {0,1,1,0},{0,0,1,1},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,0,1,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } };
-	
+
 	//J
 	private int [][][] piece6 = { { {0,0,1,0},{0,0,1,0},{0,0,1,0},{0,1,1,0} } , 
 			{ {0,1,0,0},{0,1,1,1},{0,0,0,0},{0,0,0,0} } ,
 			{ {0,1,1,0},{0,1,0,0},{0,1,0,0},{0,0,0,0} } , 
 			{ {0,0,0,0},{1,1,1,0},{0,0,1,0},{0,0,0,0} } };
-	
+
 	//T
 	private int [][][] piece7 = { { {0,1,0,0},{1,1,1,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{0,1,1,0},{0,1,0,0},{0,0,0,0} } ,
 			{ {1,1,1,0},{0,1,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{1,1,0,0},{0,1,0,0},{0,0,0,0} } };
-	
-	private int posY;
-	private int posX;
+
+	int posY;
+	int posX;
 	private int orientation;
 	private int[][][] arrayOrientations;
-	private int[][] tetriminoArray;
-	
+	int[][] tetriminoArray;
+
 	public Tetrimino() {
 		random = new Random();
-		
+
 	}
 
 	void create() {
@@ -88,20 +88,20 @@ public class Tetrimino {
 		}
 		this.tetriminoArray = arrayOrientations[orientation];
 	}
-	
+
 	public void turn() {
 		this.orientation = (orientation+1)%4;
 		this.tetriminoArray = arrayOrientations[orientation];
 	}
-	
+
 	public void goLeft() {
 		this.setPosY(this.getPosY() - 1);
 	}
-	
+
 	public void goRight() {
 		this.setPosY(this.getPosY() + 1);
 	}
-	
+
 	public void goDown() {
 		this.setPosX(this.getPosX() + 1);
 	}
