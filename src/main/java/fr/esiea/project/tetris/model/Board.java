@@ -2,14 +2,12 @@ package fr.esiea.project.tetris.model;
 
 
 public class Board {
+	public int[][] boardArray;
+	public final static int NB_LINES = 16;
+	public final static int NB_COL = 10;
 
-	int [][] boardArray;
-	final static int NB_LINES = 20;
-	final static int NB_COL = 10;
-	
-	public Board(){
+	public Board() {
 		boardArray = new int[NB_LINES][NB_COL];
-		init();
 	}
 
 	public void init() {
@@ -19,32 +17,39 @@ public class Board {
 			}
 		}
 	}
-	
-	public int checkLines() {
+
+	public int checkLine() {
 		int lines = 0;
-		boolean isComplete;
-		for (int i = 0; i < NB_LINES; i++){
-			isComplete = true;
+		boolean isLineComplete;
+		for (int i = NB_LINES; i > 0; i--){
+			isLineComplete = true;
 			for (int j = 0; j < NB_COL; j++) {
-				if (boardArray[i][j] == 0){
-					isComplete = false;
+				if (boardArray[i][j] == 0) {
+					isLineComplete = false;
 					break;
 				}
 			}
-			if (isComplete) {
+			if (isLineComplete) {
+				System.out.println("line "+Integer.toString(i)+" complete");
 				lines++;
 				cleanLine(i);
-				isComplete = false;
+				isLineComplete = false;
+				//la ligne est descendue, il faut la revérifier
+				i++;
 			}
 		}
 		return lines;
 	}
-	
-	public void cleanLine(int lineToClean) {
-		for (int i = NB_LINES; i <= 0; i--){
+
+	public void cleanLine(int lineToClean){
+		System.out.println("Clean line "+Integer.toString(lineToClean));
+		for (int i = lineToClean; i >= 0; i--){
 			for (int j = 0; j < NB_COL; j++) {
+				//on vide la ligne
+				boardArray[i][j] = 0;
 				//décallage ligne vers le bas
-				boardArray[i][j] = boardArray[i-1][j];
+				if (i>0)
+					boardArray[i][j] = boardArray[i-1][j];
 			}
 		}
 		for (int j = 0; j < NB_COL; j++) {
@@ -52,5 +57,4 @@ public class Board {
 			boardArray[0][j] = 0;
 		}
 	}
-
 }

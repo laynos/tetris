@@ -3,14 +3,21 @@ package fr.esiea.project.tetris.model;
 import java.util.Random;
 
 public class Tetrimino {
-	final int NUMBER_PIECES = 7;
+	public static final int SIZEX = 4;
+	public static final int SIZEY = 4;
+	public final static int NUMBER_PIECES = 7;
+	public int[][] tetriminoArray;
+	public int posX;
+	public int posY;
+	public int[][][] arrayOrientations;
 	private Random random;
+	public int orientation;
 	private int piece;
 	//0
-	private int [][][] piece1 = { { {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } , 
-			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } ,
-			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } , 
-			{ {0,1,1,0},{0,1,1,0},{0,1,1,0},{0,1,1,0} } };
+	private int [][][] piece1 = { { {0,0,0,0},{0,1,1,0},{0,1,1,0},{0,0,0,0} } , 
+			{ {0,0,0,0},{0,1,1,0},{0,1,1,0},{0,0,0,0} } ,
+			{ {0,0,0,0},{0,1,1,0},{0,1,1,0},{0,0,0,0} } , 
+			{ {0,0,0,0},{0,1,1,0},{0,1,1,0},{0,0,0,0} } };
 
 	//L
 	private int [][][] piece2 = { { {0,1,0,0},{0,1,0,0},{0,1,1,0},{0,0,0,0} } , 
@@ -31,12 +38,12 @@ public class Tetrimino {
 			{ {0,1,0,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } };
 	//z
 	private int [][][] piece5 = { { {0,1,1,0},{0,0,1,1},{0,0,0,0},{0,0,0,0} } , 
-			{ {0,0,1,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } ,
+			{ {0,0,1,0},{0,1,1,0},{0,1,0,0},{0,0,0,0} } ,
 			{ {0,1,1,0},{0,0,1,1},{0,0,0,0},{0,0,0,0} } , 
-			{ {0,0,1,0},{0,1,1,0},{0,0,1,0},{0,0,0,0} } };
+			{ {0,0,1,0},{0,1,1,0},{0,1,0,0},{0,0,0,0} } };
 
 	//J
-	private int [][][] piece6 = { { {0,0,1,0},{0,0,1,0},{0,0,1,0},{0,1,1,0} } , 
+	private int [][][] piece6 = { { {0,0,1,0},{0,0,1,0},{0,1,1,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{0,1,1,1},{0,0,0,0},{0,0,0,0} } ,
 			{ {0,1,1,0},{0,1,0,0},{0,1,0,0},{0,0,0,0} } , 
 			{ {0,0,0,0},{1,1,1,0},{0,0,1,0},{0,0,0,0} } };
@@ -47,21 +54,21 @@ public class Tetrimino {
 			{ {1,1,1,0},{0,1,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{1,1,0,0},{0,1,0,0},{0,0,0,0} } };
 
-	int posY;
-	int posX;
-	int orientation;
-	int[][][] arrayOrientations;
-	int[][] tetriminoArray;
 
-	public Tetrimino() {
+	private static Tetrimino INSTANCE = new Tetrimino();
+	
+	private Tetrimino() {
 		random = new Random();
-
+	}
+	
+	public static Tetrimino getInstance() {
+		return INSTANCE;
 	}
 
 	void create() {
 		piece = random.nextInt() % NUMBER_PIECES;
-		setPosX(0);
-		setPosY(3);
+		posX = 0;
+		posY = 3;
 		orientation = 0;
 		switch(piece) {
 		case 0:
@@ -89,36 +96,21 @@ public class Tetrimino {
 		this.tetriminoArray = arrayOrientations[orientation];
 	}
 
+	
 	public void turn() {
 		this.orientation = (orientation+1)%4;
 		this.tetriminoArray = arrayOrientations[orientation];
 	}
-
-	public void goLeft() {
-		this.setPosY(this.getPosY() - 1);
+	
+	public void left() {
+		this.posY -=1;
 	}
-
-	public void goRight() {
-		this.setPosY(this.getPosY() + 1);
+	
+	public void right() {
+		this.posY +=1;
 	}
-
-	public void goDown() {
-		this.setPosX(this.getPosX() + 1);
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
+	
+	public void down() {
+		this.posX +=1;
 	}
 }

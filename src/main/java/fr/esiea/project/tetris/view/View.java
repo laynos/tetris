@@ -3,7 +3,6 @@ package fr.esiea.project.tetris.view;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class View extends JFrame {
 
@@ -11,34 +10,44 @@ public class View extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -2465995542035980113L;
-
-	private JPanel board;
+	private ScorePanel score;
+	private BoardPanel board;
 	
 	public View() {
-		
-		setTitle("Tetris by BEMAT, GULL & WAN");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(450, 500);
+		setTitle("Tetris by Bemat Gull Wan");
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(800, 600);
-		
 		setLayout(new BorderLayout());
-		
-		board = new JPanel();
-		add(board, BorderLayout.CENTER);
+
+		score = new ScorePanel();
+		add(score, BorderLayout.CENTER);
+
+		board = new BoardPanel();
+		add(board, BorderLayout.EAST);
 		
 		setFocusable(true);
 		setVisible(true);
-		
 	}
 	
-	public JPanel getBoard() {
+	public BoardPanel getBoard() {
 		return this.board;
 	}
 
-	public void displayBoard() {
-		// TODO Auto-generated method stub
+	public void displayBoard(int[][] gridArray, int[][] tetriminoArray, int tetX, int tetY) {
+		board.colorizeBoard(gridArray);
+		board.colorizeTetrimino(gridArray, tetriminoArray, tetX, tetY);
 		
 	}
+	
+	public void updateScore(int newScore) {
+		score.updateScore(newScore);
+	}
+	
+	public void end(int finalScore) {
+		score.endScore(finalScore);		
+	}
+
+	
 }

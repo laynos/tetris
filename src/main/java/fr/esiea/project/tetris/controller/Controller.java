@@ -6,24 +6,25 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import fr.esiea.project.tetris.model.Model;
-import fr.esiea.project.tetris.model.Score;
 import fr.esiea.project.tetris.view.View;
 
 public class Controller {
 	private Model model;
 	private View view;
-
-	private int keyCode;
-	private Score score;
-	private boolean endOfGame;
 	private KeyListener keyListener;
-
+	private int keyCode;
+	private boolean endOfGame; 
+	private long currentTime;
+	private long nextStepTime;
+	
 	public Controller() {
 		this.model = new Model();
 		this.view = new View();
-		this.score = new Score();
 		this.endOfGame = false;
-  		view = new View();
+		this.keyCode = 0;
+		this.currentTime = 0;
+		this.nextStepTime = 0;
+		
 		this.keyListener = new KeyListener() {
 
 			public void keyPressed(KeyEvent e){
@@ -32,25 +33,37 @@ public class Controller {
 
 				if(keyCode == KeyEvent.VK_LEFT){
 					if (model.moveLeft()) {
-						view.displayBoard();
+						view.displayBoard(model.getBoard().boardArray,
+										  model.getTetrimino().tetriminoArray,
+										  model.getTetrimino().posX,
+										  model.getTetrimino().posY);
 					}
 				}
 
 				if(keyCode == KeyEvent.VK_RIGHT){
 					if (model.moveRight()) {
-						view.displayBoard();
+						view.displayBoard(model.getBoard().boardArray,
+										  model.getTetrimino().tetriminoArray,
+										  model.getTetrimino().posX,
+										  model.getTetrimino().posY);
 					}
 				}
 
 				if(keyCode == KeyEvent.VK_DOWN){
 					if (model.moveDown()) {
-						view.displayBoard();
+						view.displayBoard(model.getBoard().boardArray,
+										  model.getTetrimino().tetriminoArray,
+										  model.getTetrimino().posX,
+										  model.getTetrimino().posY);
 					}
 				}
 
-				if(keyCode == KeyEvent.VK_SPACE){
+				if(keyCode == KeyEvent.VK_UP){
 					if (model.turnTetrimino()) {
-						view.displayBoard();
+						view.displayBoard(model.getBoard().boardArray,
+										  model.getTetrimino().tetriminoArray,
+										  model.getTetrimino().posX,
+										  model.getTetrimino().posY);
 					}
 				}
 				e.consume();
@@ -60,30 +73,50 @@ public class Controller {
 			public void keyTyped(KeyEvent arg0) {}
 		};
 
-		view.addKeyListener(keyListener);
-		
+		view.addKeyListener(keyListener);	
+	}
+	
+	public void play()
+	{
+		this.gameLoop();
+		this.notifyEnd();
+	}
+	
+	private void gameLoop() {
 		while (! endOfGame) {
+			//wait for step
+			currentTime = System.currentTimeMillis();
+			nextStepTime = currentTime + 500;
+			while(nextStepTime - currentTime > 0)
+				currentTime = System.currentTimeMillis();
+			
 			if (model.moveDown()) {
-				view.displayBoard();
+				view.displayBoard(model.getBoard().boardArray,
+								  model.getTetrimino().tetriminoArray,
+								  model.getTetrimino().posX,
+								  model.getTetrimino().posY);
 			}
 			else {
 				this.step();
 			}
 		}
-		this.end();
 	}
-
-	private void end() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	private void step() {
-		score.scoreUp(model.board.checkLines());
+		//on ajoute la pièce à la grille
 		model.anchorTetrimino();
+		//si des lignes sont complètes, on clean et on incrémente le score
+		model.getScore().incrementScore(model.getBoard().checkLine());
+		view.updateScore(model.getScore().getScore());
 		model.newTetrimino();
-		view.displayBoard();
+		view.displayBoard(model.getBoard().boardArray,
+						  model.getTetrimino().tetriminoArray,
+						  model.getTetrimino().posX,
+						  model.getTetrimino().posY);
 		endOfGame = model.checkEndOfGame();
-		
-	}		  	
+	}
+	
+	private void notifyEnd(){
+		view.end(model.getScore().getScore());
+	}
 }
