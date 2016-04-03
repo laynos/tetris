@@ -47,30 +47,78 @@ public class Tetrimino {
 			{ {1,1,1,0},{0,1,0,0},{0,0,0,0},{0,0,0,0} } , 
 			{ {0,1,0,0},{1,1,0,0},{0,1,0,0},{0,0,0,0} } };
 	
+	private int posY;
+	private int posX;
+	private int orientation;
+	private int[][][] arrayOrientations;
+	private int[][] tetriminoArray;
+	
 	public Tetrimino() {
 		random = new Random();
 		
 	}
 
-	@SuppressWarnings("unused")
-	private int[][][] create() {
+	void create() {
 		piece = random.nextInt() % NUMBER_PIECES;
+		setPosX(0);
+		setPosY(3);
+		orientation = 0;
 		switch(piece) {
 		case 0:
-			return piece1;
+			this.arrayOrientations = piece1;
+			break;
 		case 1:
-			return piece2;
+			this.arrayOrientations = piece2;
+			break;
 		case 2:
-			return piece3;
+			this.arrayOrientations = piece3;
+			break;
 		case 3:
-			return piece4;
+			this.arrayOrientations = piece4;
+			break;
 		case 4:
-			return piece5;
+			this.arrayOrientations = piece5;
+			break;
 		case 5:
-			return piece6;
+			this.arrayOrientations = piece6;
+			break;
 		case 6:
-			return piece7;
-		default:return null;
+			this.arrayOrientations = piece7;
+			break;
 		}
+		this.tetriminoArray = arrayOrientations[orientation];
+	}
+	
+	public void turn() {
+		this.orientation = (orientation+1)%4;
+		this.tetriminoArray = arrayOrientations[orientation];
+	}
+	
+	public void goLeft() {
+		this.setPosY(this.getPosY() - 1);
+	}
+	
+	public void goRight() {
+		this.setPosY(this.getPosY() + 1);
+	}
+	
+	public void goDown() {
+		this.setPosX(this.getPosX() + 1);
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
 }

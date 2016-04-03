@@ -1,22 +1,39 @@
 package fr.esiea.project.tetris.view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Frame {
+public class Frame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2465995542035980113L;
+
+	private JPanel board;
+	
 	public Frame() {
-		JFrame frame = new JFrame();
 		
-
-		frame.setTitle("Tetris by BEMAT, GULL & WAN");
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+		setTitle("Tetris by BEMAT, GULL & WAN");
+		setResizable(false);
+		setLocationRelativeTo(null);
 		
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 600);
-		frame.setFocusable(true);
-		frame.setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		
+		setLayout(new BorderLayout());
+		
+		board = new JPanel();
+		add(board, BorderLayout.CENTER);
+		
+		setFocusable(true);
+		setVisible(true);
 		
 	}
-
+	
+	public JPanel getBoard() {
+		return this.board;
+	}
 }

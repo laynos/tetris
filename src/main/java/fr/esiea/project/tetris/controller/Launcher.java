@@ -9,7 +9,7 @@ public class Launcher {
 		Board Board = new Board();
 		
 		while(Game.done() == false){
-			Board.go();
+			
 		}
 	}
 
