@@ -49,8 +49,8 @@ public class Tetrimino {
 
 	int posY;
 	int posX;
-	private int orientation;
-	private int[][][] arrayOrientations;
+	int orientation;
+	int[][][] arrayOrientations;
 	int[][] tetriminoArray;
 
 	public Tetrimino() {

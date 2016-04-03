@@ -7,8 +7,8 @@ public class Score {
 		this.score = 0;
 	}
 	
-	public  void scoreUp() {
-		score++;
+	public  void scoreUp(int nbLines) {
+		score += nbLines;
 	}
 	
 	public int getScore() {

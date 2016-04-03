@@ -4,8 +4,8 @@ package fr.esiea.project.tetris.model;
 public class Board {
 
 	int [][] boardArray;
-	private final int NB_LINES = 20;
-	private final int NB_COL = 10;
+	final static int NB_LINES = 20;
+	final static int NB_COL = 10;
 	
 	public Board(){
 		boardArray = new int[NB_LINES][NB_COL];

@@ -36,4 +36,9 @@ public class View extends JFrame {
 	public JPanel getBoard() {
 		return this.board;
 	}
+
+	public void displayBoard() {
+		// TODO Auto-generated method stub
+		
+	}
 }
