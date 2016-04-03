@@ -45,14 +45,14 @@ public class BoardPanel extends JPanel{
 	}
 	
 	private void initColors() {
-	      colors[0] = Color.WHITE;;
-	      colors[1] = Color.CYAN;
-	      colors[2] = Color.YELLOW;
-	      colors[3] = Color.PINK;
-	      colors[4] = Color.GREEN;
-	      colors[5] = Color.RED;
-	      colors[6] = Color.BLUE;
-	      colors[7] = Color.ORANGE;
+	      colors[0] = Color.WHITE;
+	      colors[1] = Color.BLUE;;
+	      colors[2] = Color.RED;
+	      colors[3] = Color.MAGENTA;
+	      colors[4] = Color.CYAN;
+	      colors[5] = Color.YELLOW;
+	      colors[6] = Color.ORANGE;
+	      colors[7] = Color.GREEN;;
 	}
 
 	public void colorizeBoard(int[][] gridArray) {

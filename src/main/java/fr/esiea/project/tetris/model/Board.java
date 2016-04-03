@@ -21,17 +21,20 @@ public class Board {
 	public int checkLine() {
 		int lines = 0;
 		boolean isLineComplete;
-		for (int i = NB_LINES; i > 0; i--){
+		for (int i = NB_LINES-1; i > 0; i--){
 			isLineComplete = true;
+			//System.out.println(i);
 			for (int j = 0; j < NB_COL; j++) {
+				System.out.println(j);
 				if (boardArray[i][j] == 0) {
 					isLineComplete = false;
 					break;
 				}
 			}
 			if (isLineComplete) {
-				System.out.println("line "+Integer.toString(i)+" complete");
+				//System.out.println("line "+Integer.toString(i)+" complete");
 				lines++;
+
 				cleanLine(i);
 				isLineComplete = false;
 				//la ligne est descendue, il faut la revérifier
@@ -42,7 +45,7 @@ public class Board {
 	}
 
 	public void cleanLine(int lineToClean){
-		System.out.println("Clean line "+Integer.toString(lineToClean));
+		//System.out.println("Clean line "+Integer.toString(lineToClean));
 		for (int i = lineToClean; i >= 0; i--){
 			for (int j = 0; j < NB_COL; j++) {
 				//on vide la ligne
