@@ -23,7 +23,7 @@ public class Keyboard implements KeyListener{
 	
 		}
 		
-		if (arg0.getKeyCode()== KeyEvent.VK_ESCAPE){
+		if (arg0.getKeyCode()== KeyEvent.VK_P){
 			Game.pause();
 		}
 	}

@@ -2,8 +2,6 @@ package fr.esiea.project.tetris.view;
 
 import javax.swing.JFrame;
 
-import fr.esiea.project.tetris.controller.Keyboard;
-
 public class Frame {
 
 	public Frame() {
@@ -14,8 +12,7 @@ public class Frame {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		
-		frame.addKeyListener(new Keyboard());
-		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 600);
 		frame.setFocusable(true);
 		frame.setVisible(true);
