@@ -65,8 +65,8 @@ public class Tetrimino {
 		return INSTANCE;
 	}
 
-	void create() {
-		piece = random.nextInt() % NUMBER_PIECES;
+	public void create() {
+		piece = random.nextInt() % NUMBER_PIECES+1;
 		posX = 0;
 		posY = 3;
 		orientation = 0;
@@ -92,6 +92,8 @@ public class Tetrimino {
 		case 6:
 			this.arrayOrientations = piece7;
 			break;
+		default:
+			this.arrayOrientations = piece1;
 		}
 		this.tetriminoArray = arrayOrientations[orientation];
 	}
